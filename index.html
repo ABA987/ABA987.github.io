@@ -1,783 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>ABA — Clothing Brand</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="ABA — modern streetwear and essentials." />
-  <style>
-    :root {
-      --bg: #050509;
-      --bg-alt: #0c0c12;
-      --accent: #f5f5f5;
-      --accent-soft: #b3b3b3;
-      --primary: #f5f5f5;
-      --secondary: #888;
-      --highlight: #e0ff4f;
-      --danger: #ff4f6a;
-      --radius: 10px;
-      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
-      --max-width: 1120px;
-      --transition: 0.25s ease;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    * {
-      box-sizing: border-box;
+  <style>
+    body {
       margin: 0;
       padding: 0;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #181824 0, #050509 55%);
-      color: var(--primary);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
-
-    .page {
-      width: 100%;
-      max-width: var(--max-width);
-      padding: 24px 18px 60px;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
     }
 
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 4px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
     }
 
-    .logo-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: conic-gradient(from 210deg, #e0ff4f, #ff4f6a, #7f5dff, #e0ff4f);
-      padding: 2px;
-    }
-
-    .logo-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      background: #050509;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo-text span:first-child {
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      font-size: 13px;
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    .logo-text span:last-child {
-      font-size: 11px;
-      color: var(--secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    nav {
-      display: flex;
-      gap: 18px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    nav a {
-      color: var(--accent-soft);
-      text-decoration: none;
-      position: relative;
-      padding-bottom: 4px;
-      cursor: pointer;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: var(--highlight);
-      transition: width var(--transition);
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .pill {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--accent-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.02);
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #4cff8f;
-      box-shadow: 0 0 12px rgba(76,255,143,0.7);
-    }
-
-    main {
+    .products {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 26px;
-    }
-
-    @media (max-width: 840px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-      }
-      nav {
-        flex-wrap: wrap;
-      }
-    }
-
-    .hero {
-      background: radial-gradient(circle at top left, #26263a 0, #0b0b12 55%);
-      border-radius: 18px;
-      padding: 22px 22px 20px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-tagline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .hero-tagline span {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-    }
-
-    .hero-title {
-      font-size: clamp(32px, 4vw, 40px);
-      line-height: 1.1;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 10px;
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      color: var(--accent-soft);
-      max-width: 360px;
-      margin-bottom: 18px;
-    }
-
-    .hero-cta-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      border-radius: 999px;
-      padding: 9px 18px;
-      border: none;
-      background: linear-gradient(135deg, #e0ff4f, #ff4f6a);
-      color: #050509;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.75);
-    }
-
-    .btn-secondary {
-      border-radius: 999px;
-      padding: 9px 16px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(5,5,9,0.7);
-      color: var(--accent-soft);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background var(--transition), color var(--transition), border var(--transition);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.06);
-      color: var(--primary);
-      border-color: rgba(255,255,255,0.4);
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-    }
-
-    .hero-meta strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .hero-art {
-      position: absolute;
-      right: -40px;
-      bottom: -40px;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 20% 0, #e0ff4f 0, #ff4f6a 35%, #7f5dff 70%, transparent 72%);
-      opacity: 0.9;
-      filter: blur(1px);
-      pointer-events: none;
-    }
-
-    .hero-art-inner {
-      position: absolute;
-      inset: 40px;
-      border-radius: inherit;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: radial-gradient(circle at 30% 0, rgba(255,255,255,0.12), rgba(5,5,9,0.9));
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 16px;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-art-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-      margin-bottom: 4px;
-    }
-
-    .hero-art-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .hero-art-pill {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(5,5,9,0.8);
-      border: 1px solid rgba(255,255,255,0.18);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent-soft);
-    }
-
-    .hero-art-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #4cff8f;
-    }
-
-    .side-column {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--bg-alt);
-      border-radius: 16px;
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .card-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-    }
-
-    .card-badge {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.12);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-    }
-
-    .card-body {
-      font-size: 12px;
-      color: var(--accent-soft);
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .product-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
     }
 
     .product {
-      background: radial-gradient(circle at top, #1b1b28 0, #050509 60%);
-      border-radius: 12px;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
-    }
-
-    .product:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.8);
-      border-color: rgba(255,255,255,0.18);
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
     }
 
     .product-image {
-      height: 90px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, #e0ff4f, #ff4f6a);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-image::after {
-      content: "ABA";
-      position: absolute;
-      inset: 0;
+      height: 200px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 0.3em;
-      color: rgba(5,5,9,0.85);
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 16px;
+    }
+
+    .black {
+      background: #111;
+      color: white;
+    }
+
+    .white {
+      background: #eee;
+      color: #111;
     }
 
     .product-name {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .product-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--accent-soft);
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     .price {
-      font-weight: 600;
-      color: var(--primary);
+      margin-top: 5px;
+      font-size: 15px;
     }
 
-    .tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 3px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
-    .size-guide {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--accent-soft);
-    }
-
-    .size-col span:first-child {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--secondary);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .size-col strong {
-      display: block;
-      color: var(--primary);
-      margin-bottom: 2px;
-    }
-
-    .newsletter {
+    .stock {
       margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .newsletter small {
-      font-size: 11px;
-      color: var(--accent-soft);
-    }
-
-    .newsletter-form {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .newsletter-form input {
-      flex: 1;
-      min-width: 0;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(5,5,9,0.8);
-      color: var(--primary);
-      font-size: 12px;
-      outline: none;
-    }
-
-    .newsletter-form input::placeholder {
-      color: var(--secondary);
-    }
-
-    .newsletter-form button {
-      border-radius: 999px;
-      padding: 8px 14px;
-      border: none;
-      background: #e0ff4f;
-      color: #050509;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .lookbook {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .look {
-      flex: 1;
-      height: 70px;
-      border-radius: 10px;
-      background: radial-gradient(circle at top, #ff4f6a 0, #050509 65%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .look:nth-child(2) {
-      background: radial-gradient(circle at top, #e0ff4f 0, #050509 65%);
-    }
-
-    .look::after {
-      content: "Drop";
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      padding: 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(5,5,9,0.9);
-      font-weight: 700;
-    }
-
-    .look:nth-child(2)::after {
-      content: "Campaign";
+      font-size: 13px;
+      color: #d11;
+      font-weight: bold;
     }
 
     footer {
-      margin-top: 30px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--secondary);
-    }
-
-    footer a {
-      color: var(--accent-soft);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--primary);
-    }
-
-    .social {
-      display: flex;
-      gap: 10px;
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+      font-size: 12px;
+      color: #555;
     }
   </style>
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <div class="logo">
-        <div class="logo-mark">
-          <div class="logo-inner">A</div>
-        </div>
-        <div class="logo-text">
-          <span>ABA</span>
-          <span>Clothing Studio</span>
-        </div>
+
+  <header>ABA</header>
+
+  <div class="container">
+
+    <div class="section-title">Shop</div>
+
+    <div class="products">
+
+      <!-- Black Graffiti Tee -->
+      <div class="product">
+        <div class="product-image black">GRAFFITI</div>
+        <div class="product-name">ABA Graffiti Tee — Black</div>
+        <div class="price">$20</div>
+        <div class="stock">Medium — Only 1 left</div>
       </div>
-      <nav>
-        <a href="#shop">Shop</a>
-        <a href="#about">About</a>
-        <a href="#size">Size guide</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <section class="hero" id="about">
-        <div class="hero-tagline">
-          <span>Modern streetwear & essentials</span>
-          <div class="pill">
-            <span class="pill-dot"></span>
-            New drop live now
-          </div>
-        </div>
-        <h1 class="hero-title">ABA / 2025 Collection</h1>
-        <p class="hero-sub">
-          Minimal silhouettes, heavy fabrics, and everyday pieces built to live in. Designed for movement, made to last.
-        </p>
-        <div class="hero-cta-row">
-          <button class="btn-primary" onclick="scrollToSection('shop')">
-            Shop collection
-          </button>
-          <button class="btn-secondary" onclick="scrollToSection('lookbook')">
-            View lookbook
-          </button>
-        </div>
-        <div class="hero-meta">
-          <span><strong>Free shipping</strong> over $120</span>
-          <span><strong>Easy returns</strong> within 30 days</span>
-          <span><strong>Worldwide</strong> delivery</span>
-        </div>
-
-        <div class="hero-art">
-          <div class="hero-art-inner">
-            <div class="hero-art-label">Featured piece</div>
-            <div class="hero-art-title">Heavyweight ABA Hoodie</div>
-            <div class="hero-art-pill">
-              <span class="hero-art-pill-dot"></span>
-              460 GSM / Oversized fit
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <aside class="side-column">
-        <section class="card" id="shop">
-          <div class="card-header">
-            <div class="card-title">Featured products</div>
-            <div class="card-badge">Drop 01</div>
-          </div>
-          <div class="card-body">
-            <div class="product-grid">
-              <div class="product">
-                <div class="product-image"></div>
-                <div class="product-name">ABA Heavyweight Hoodie</div>
-                <div class="product-meta">
-                  <span class="price">$120</span>
-                  <span class="tag">Unisex</span>
-                </div>
-              </div>
-              <div class="product">
-                <div class="product-image"></div>
-                <div class="product-name">Relaxed Logo Tee</div>
-                <div class="product-meta">
-                  <span class="price">$55</span>
-                  <span class="tag">Organic</span>
-                </div>
-              </div>
-              <div class="product">
-                <div class="product-image"></div>
-                <div class="product-name">Everyday Cargo Pants</div>
-                <div class="product-meta">
-                  <span class="price">$95</span>
-                  <span class="tag">New</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" id="size">
-          <div class="card-header">
-            <div class="card-title">Size guide</div>
-            <div class="card-badge">Unisex fit</div>
-          </div>
-          <div class="card-body">
-            <div class="size-guide">
-              <div class="size-col">
-                <span>Hoodies</span>
-                <strong>S — XXL</strong>
-                <span>Oversized, drop shoulder</span>
-              </div>
-              <div class="size-col">
-                <span>Tees</span>
-                <strong>XS — XXL</strong>
-                <span>Relaxed, true to size</span>
-              </div>
-              <div class="size-col">
-                <span>Bottoms</span>
-                <strong>28 — 38</strong>
-                <span>Adjustable waist</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" id="lookbook">
-          <div class="card-header">
-            <div class="card-title">Lookbook</div>
-            <div class="card-badge">Campaign</div>
-          </div>
-          <div class="card-body">
-            <p>Visual story of the ABA universe. Pair your favourite pieces, layer textures, and build your own uniform.</p>
-            <div class="lookbook">
-              <div class="look"></div>
-              <div class="look"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" id="contact">
-          <div class="card-header">
-            <div class="card-title">Stay in the loop</div>
-            <div class="card-badge">Newsletter</div>
-          </div>
-          <div class="card-body">
-            <div class="newsletter">
-              <small>Be first to know about drops, restocks, and early access codes.</small>
-              <form class="newsletter-form" onsubmit="event.preventDefault(); alert('This is a demo — connect to your email platform later.');">
-                <input type="email" placeholder="Enter your email" required />
-                <button type="submit">Join</button>
-              </form>
-            </div>
-          </div>
-        </section>
-      </aside>
-    </main>
-
-    <footer>
-      <span>© <span id="year"></span> ABA. All rights reserved.</span>
-      <div class="social">
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-        <a href="#">Email</a>
+      <!-- White Logo Tee -->
+      <div class="product">
+        <div class="product-image white">LOGO</div>
+        <div class="product-name">ABA Logo Tee — White</div>
+        <div class="price">$20</div>
+        <div class="stock">Medium — Only 1 left</div>
       </div>
-    </footer>
+
+    </div>
+
   </div>
+
+  <footer>© <span id="year"></span> ABA — All Rights Reserved</footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      window.scrollTo({
-        top: el.getBoundingClientRect().top + window.scrollY - 70,
-        behavior: "smooth"
-      });
-    }
   </script>
+
 </body>
 </html>
